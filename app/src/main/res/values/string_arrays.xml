@@ -3,7 +3,6 @@
     <string-array name="MOVIE_WESTERN">
         <item>300</item>
         <item>007</item>
-        <item>AI</item>
         <item>고스트 라이더</item>
         <item>고질라</item>
         <item>그린북</item>
@@ -14,14 +13,14 @@
         <item>다크나이트</item>
         <item>대부</item>
         <item>더울프 오브 월스트리트</item>
-        <item>던 앤 더머</item>
+        <item>덤 앤 더머</item>
         <item>데스노트</item>
         <item>라라랜드</item>
         <item>라이언일병구하기</item>
         <item>레디플레이어 원</item>
         <item>레미제라블</item>
         <item>레옹</item>
-        <item>로키</item>
+        <item>록키</item>
         <item>리얼 스틸</item>
         <item>마스크</item>
         <item>맘마미아</item>
@@ -41,7 +40,6 @@
         <item>비긴어게인</item>
         <item>빅브라더</item>
         <item>쇼생크 탈출</item>
-        <item>슈퍼맨</item>
         <item>스쿨오브락</item>
         <item>스크림</item>
         <item>스타워즈</item>
@@ -56,9 +54,8 @@
         <item>엽문</item>
         <item>예스맨</item>
         <item>원스</item>
-        <item>월-e</item>
         <item>월드 워 Z</item>
-        <item>월드오브 워크래프트</item>
+        <item>워크래프트</item>
         <item>위플래시</item>
         <item>이상한 나라의 앨리스</item>
         <item>인디아나 존스</item>
@@ -116,7 +113,6 @@
         <item>박수건달</item>
         <item>배테랑</item>
         <item>범죄도시</item>
-        <item>범죄도시</item>
         <item>범죄와의 전쟁</item>
         <item>복면달호</item>
         <item>부당거래</item>
@@ -130,7 +126,7 @@
         <item>신세계</item>
         <item>실미도</item>
         <item>써니</item>
-        <item>엑시티</item>
+        <item>엑시트</item>
         <item>올드보이</item>
         <item>완득이</item>
         <item>왕의 남자</item>
@@ -144,12 +140,11 @@
         <item>조선명탐정</item>
         <item>좋은놈나쁜놈이상한놈</item>
         <item>집으로</item>
-        <item>출발비디오여행</item>
         <item>타짜</item>
         <item>태극기휘날리며</item>
         <item>택시운전사</item>
         <item>파송송 계란탁</item>
-        <item>퍼팩트맨</item>
+        <item>퍼펙트맨</item>
         <item>해바라기</item>
         <item>해적</item>
         <item>화이</item>
@@ -193,7 +188,7 @@
         <item>센과 치히로의 행방불명</item>
         <item>소시지파티</item>
         <item>소울</item>
-        <item>슈랙</item>
+        <item>슈렉</item>
         <item>슈퍼마리오</item>
         <item>슈퍼배드</item>
         <item>스머프</item>
@@ -208,9 +203,9 @@
         <item>아치와 씨팍</item>
         <item>아키라</item>
         <item>업</item>
-        <item>에반개리온</item>
+        <item>에반게리온</item>
         <item>원피스</item>
-        <item>월리스와 그로밋</item>
+        <item>월래스와 그로밋</item>
         <item>인사이드 아웃</item>
         <item>인어공주</item>
         <item>인크레더블</item>
