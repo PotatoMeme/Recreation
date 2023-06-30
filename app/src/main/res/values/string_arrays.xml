@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="MOVIE_WESTERN">
+        <item>300</item>
+        <item>007</item>
+        <item>AI</item>
+        <item>고스트 라이더</item>
+        <item>고질라</item>
+        <item>그린북</item>
+        <item>나는전설이다</item>
+        <item>나우 유 씨 미</item>
+        <item>나혼자집에</item>
+        <item>노인을위한 나라는 없다</item>
+        <item>다크나이트</item>
+        <item>대부</item>
+        <item>더울프 오브 월스트리트</item>
+        <item>던 앤 더머</item>
+        <item>데스노트</item>
+        <item>라라랜드</item>
+        <item>라이언일병구하기</item>
+        <item>레디플레이어 원</item>
+        <item>레미제라블</item>
+        <item>레옹</item>
+        <item>로키</item>
+        <item>리얼 스틸</item>
+        <item>마스크</item>
+        <item>맘마미아</item>
+        <item>매드맥스</item>
+        <item>매트릭스</item>
+        <item>맨 오브 스틸</item>
+        <item>맨인블랙</item>
+        <item>머니볼</item>
+        <item>몬티파이튼의 성배</item>
+        <item>미션임파서블</item>
+        <item>미이라</item>
+        <item>박물관이 살아있다</item>
+        <item>반지의 제왕</item>
+        <item>베이비드라이버</item>
+        <item>분노의질주</item>
+        <item>블레이드</item>
+        <item>비긴어게인</item>
+        <item>빅브라더</item>
+        <item>쇼생크 탈출</item>
+        <item>슈퍼맨</item>
+        <item>스쿨오브락</item>
+        <item>스크림</item>
+        <item>스타워즈</item>
+        <item>스파이더맨</item>
+        <item>아바타</item>
+        <item>아이언맨</item>
+        <item>알라딘</item>
+        <item>어거스트 러쉬</item>
+        <item>어벤져스</item>
+        <item>언터처블</item>
+        <item>엑스맨</item>
+        <item>엽문</item>
+        <item>예스맨</item>
+        <item>원스</item>
+        <item>월-e</item>
+        <item>월드 워 Z</item>
+        <item>월드오브 워크래프트</item>
+        <item>위플래시</item>
+        <item>이상한 나라의 앨리스</item>
+        <item>인디아나 존스</item>
+        <item>인셉션</item>
+        <item>인턴</item>
+        <item>장고</item>
+        <item>조커</item>
+        <item>존윅</item>
+        <item>죠스</item>
+        <item>쥬만지</item>
+        <item>지.아이.조</item>
+        <item>캐리비안의 해적</item>
+        <item>킹스맨</item>
+        <item>킹콩</item>
+        <item>터미네이터</item>
+        <item>테이큰</item>
+        <item>토르</item>
+        <item>트랜스포머</item>
+        <item>트루먼쇼</item>
+        <item>퍼시픽림</item>
+        <item>포레스트 검프</item>
+        <item>퓨리</item>
+        <item>해리포터</item>
+    </string-array>
+    <string-array name="MOVIE_KOREA">
+        <item>7광구</item>
+        <item>7번방의 선물</item>
+        <item>JSA 공동경비구역</item>
+        <item>건축학개론</item>
+        <item>걸캅스</item>
+        <item>검사외전</item>
+        <item>검은사제들</item>
+        <item>곡성</item>
+        <item>관상</item>
+        <item>광해 왕이된남자</item>
+        <item>괴물</item>
+        <item>국가대표</item>
+        <item>국제시장</item>
+        <item>군함도</item>
+        <item>그것만이 내세상</item>
+        <item>극한직업</item>
+        <item>기생충</item>
+        <item>끝까지간다</item>
+        <item>내부자들</item>
+        <item>도둑들</item>
+        <item>독전</item>
+        <item>돈</item>
+        <item>럭키</item>
+        <item>마스터</item>
+        <item>마약왕</item>
+        <item>말아톤</item>
+        <item>미스터 고</item>
+        <item>미스터 소크라테스</item>
+        <item>밀정</item>
+        <item>박수건달</item>
+        <item>배테랑</item>
+        <item>범죄도시</item>
+        <item>범죄도시</item>
+        <item>범죄와의 전쟁</item>
+        <item>복면달호</item>
+        <item>부당거래</item>
+        <item>부산행</item>
+        <item>살인의 추억</item>
+        <item>선생 김봉두</item>
+        <item>설국열차</item>
+        <item>숨바꼭질</item>
+        <item>쉬리</item>
+        <item>시실리 2km</item>
+        <item>신세계</item>
+        <item>실미도</item>
+        <item>써니</item>
+        <item>엑시티</item>
+        <item>올드보이</item>
+        <item>완득이</item>
+        <item>왕의 남자</item>
+        <item>웰컴 투 동막골</item>
+        <item>의형제</item>
+        <item>이끼</item>
+        <item>이웃사촌</item>
+        <item>자전차왕 엄복동</item>
+        <item>전설의 주먹</item>
+        <item>전우치</item>
+        <item>조선명탐정</item>
+        <item>좋은놈나쁜놈이상한놈</item>
+        <item>집으로</item>
+        <item>출발비디오여행</item>
+        <item>타짜</item>
+        <item>태극기휘날리며</item>
+        <item>택시운전사</item>
+        <item>파송송 계란탁</item>
+        <item>퍼팩트맨</item>
+        <item>해바라기</item>
+        <item>해적</item>
+        <item>화이</item>
+        <item>황해</item>
+        <item>회사원</item>
+        <item>히말라야</item>
+    </string-array>
+    <string-array name="MOVIE_COMIC">
+        <item>가디언즈</item>
+        <item>검정고무신</item>
+        <item>겨울왕국</item>
+        <item>괴물의 아이</item>
+        <item>꿀벌 대소동</item>
+        <item>너의 이름은</item>
+        <item>늑대아이</item>
+        <item>니모를 찾아서</item>
+        <item>도라에몽</item>
+        <item>둘리</item>
+        <item>드래곤 길들이기</item>
+        <item>디지몬</item>
+        <item>또봇</item>
+        <item>라따뚜이</item>
+        <item>라바</item>
+        <item>라이온 킹</item>
+        <item>라푼젤</item>
+        <item>랭고</item>
+        <item>마다가스카</item>
+        <item>마다가스카의 팽귄</item>
+        <item>마당을 나온 암탉</item>
+        <item>마이펫의 이중생활</item>
+        <item>메가마인드</item>
+        <item>모아나</item>
+        <item>목소리의 형태</item>
+        <item>몬스터 주식회사</item>
+        <item>미니언즈</item>
+        <item>버즈 라이트이어</item>
+        <item>볼트</item>
+        <item>빅 히어로</item>
+        <item>뽀로로</item>
+        <item>섬머워즈</item>
+        <item>센과 치히로의 행방불명</item>
+        <item>소시지파티</item>
+        <item>소울</item>
+        <item>슈랙</item>
+        <item>슈퍼마리오</item>
+        <item>슈퍼배드</item>
+        <item>스머프</item>
+        <item>스파이더맨:뉴유니버스</item>
+        <item>스폰지밥</item>
+        <item>슬램덩크</item>
+        <item>시간을달리는 소녀</item>
+        <item>신데렐라</item>
+        <item>심슨</item>
+        <item>씽</item>
+        <item>아이스에이지</item>
+        <item>아치와 씨팍</item>
+        <item>아키라</item>
+        <item>업</item>
+        <item>에반개리온</item>
+        <item>원피스</item>
+        <item>월리스와 그로밋</item>
+        <item>인사이드 아웃</item>
+        <item>인어공주</item>
+        <item>인크레더블</item>
+        <item>주먹왕 랄프</item>
+        <item>주토피아</item>
+        <item>짱구</item>
+        <item>카</item>
+        <item>코난</item>
+        <item>코코</item>
+        <item>쿵푸팬더</item>
+        <item>토이스토리</item>
+        <item>트롤</item>
+        <item>포켓몬스터</item>
+        <item>플란다스의 개</item>
+        <item>하늘에서 음식이 내린다면</item>
+        <item>하울의 움직이는성</item>
+        <item>해피피트</item>
+
+    </string-array>
+    <string-array name="PROVERB">
+        <item>가는 날이 장날이다. </item>
+        <item>가는 말이 고와야 오는 말이 곱다. </item>
+        <item>가랑비에 옷 젖는 줄 모른다.</item>
+        <item>가랑잎이 솔잎더러 바스락거린다고 한다.</item>
+        <item>가재는 게 편이라.</item>
+        <item>가지 많은 나무에 바람 잘 날 없다.</item>
+        <item>간에 기별도 안간다</item>
+        <item>간에 붙었다 쓸개에 붙었다 한다.</item>
+        <item>간이 콩알만해지다. </item>
+        <item>갈수록 태산</item>
+        <item>같은 값이면 다홍치마</item>
+        <item>개구리 올챙이 적 생각을 못한다.</item>
+        <item>개밥에 도토리</item>
+        <item>개천에서 용 난다.</item>
+        <item>고기는 씹어야 맛이고, 말은 해야 맛이라</item>
+        <item>고래 싸움에 새우 등 터진다.</item>
+        <item>고양이 목에 방울 달기.</item>
+        <item>공든 탑이 무너지랴</item>
+        <item>구더기 무서워 장 못 담글까.</item>
+        <item>구슬이 서 말이라도 꿰어야 보배</item>
+        <item>귀에 걸면 귀걸이, 코에 걸면 코걸이</item>
+        <item>그림의 떡</item>
+        <item>금강산도 식후경</item>
+        <item>까마귀 날자 배 떨어진다.</item>
+        <item>꿩 대신 닭.</item>
+        <item>꿩 먹고 알 먹기</item>
+        <item>남의 잔치에 감 놓아라 배 놓아라 한다.</item>
+        <item>낫 놓고 기억자도 모른다.</item>
+        <item>낮말은 새가 듣고 밤말은 쥐가 듣는다.</item>
+        <item>내 코가 석 자</item>
+        <item>누워서 침 뱉기</item>
+        <item>늦게 배운 도둑이 날 새는 줄 모른다.</item>
+        <item>다 된 죽에 코 풀기</item>
+        <item>달면 삼키고 쓰면 뱉는다.</item>
+        <item>닭 잡아 먹고 오리발 내민다.</item>
+        <item>도둑이 제 발 저리다.</item>
+        <item>돌다리도 두드려 보고 건너라.</item>
+        <item>되로 주고 말로 받는다.</item>
+        <item>등잔 밑이 어둡다.</item>
+        <item>땅 짚고 헤엄치기</item>
+        <item>똥 묻은 개가 겨 묻은 개 나무란다.</item>
+        <item>뛰는 놈 위에 나는 놈 있다.</item>
+        <item>마른 하늘에 날벼락</item>
+        <item>말 한마디에 천 냥 빚 갚는다.</item>
+        <item>목구멍이 포도청</item>
+        <item>못 된 송아지 엉덩이에 뿔 난다.</item>
+        <item>믿는 도끼에 발등 찍힌다.</item>
+        <item>밑 빠진 독에 물 붓기</item>
+        <item>바늘 도둑이 소 도둑 된다.</item>
+        <item>배보다 배꼽이 더 크다.</item>
+        <item>백지장도 맛들면 낫다.</item>
+        <item>벼룩의 간 빼먹기</item>
+        <item>병 주고 약 준다.</item>
+        <item>보기 좋은 떡이 먹기도 좋다.</item>
+        <item>빛 좋은 개살구</item>
+        <item>사공이 많으면 배가 산으로 간다.</item>
+        <item>새발의 피</item>
+        <item>서당 개 삼 년에 풍월을 읊는다.</item>
+        <item>세 살 버릇 여든까지 간다.</item>
+        <item>소 잃고 외양간 고친다.</item>
+        <item>소문난 잔치에 먹을 것 없다.</item>
+        <item>쇠뿔도 단김에 빼랬다.</item>
+        <item>수박 겉 핥기</item>
+        <item>식은 죽 먹기</item>
+        <item>십 년이면 강산도 변한다.</item>
+        <item>싼 게 비지떡</item>
+        <item>아는 길도 물어서 가라</item>
+        <item>아니 땐 굴뚝에 연기 나랴.</item>
+        <item>아닌 밤중에 홍두깨</item>
+        <item>약방에 감초 </item>
+        <item>어물전 망신은 꼴뚜기가 시킨다.</item>
+        <item>열 길 물 속은 알아도 한 길 사람 속은 모른다.</item>
+        <item>열 번 찍어 아니 넘어가는 나무 없다.</item>
+        <item>오뉴월 감기는 개도 아니 앓는다.</item>
+        <item>오르지 못할 나무는 쳐다보지도 말라.</item>
+        <item>옥의 티</item>
+        <item>우물에 가서 숭늉 찾는다.</item>
+        <item>울며 겨자 먹기</item>
+        <item>원수는 외나무 다리에서 만난다.</item>
+        <item>원숭이도 나무에서 떨어진다.</item>
+        <item>윗물이 맑아야 아랫물도 맑다.</item>
+        <item>자라 보고 놀란 가슴 솥뚜껑 보고 놀란다.</item>
+        <item>자랄 나무는 떡잎부터 알아본다.</item>
+        <item>작은 고추가 더 맵다.</item>
+        <item>종로에서 뺨 맞고 한강 가서 눈 흘긴다.</item>
+        <item>좋은 약은 입에 쓰다.</item>
+        <item>쥐구멍에도 볕 들 날이 있다.</item>
+        <item>지렁이도 밟으면 꿈틀한다.</item>
+        <item>천 리 길도 한 걸음부터</item>
+        <item>칼로 물 베기</item>
+        <item>콩 심은 데 콩 나고 팥 심은 데 팥 난다.</item>
+        <item>티끌 모아 태산</item>
+        <item>핑계 없는 무덤 없다.</item>
+        <item>하늘의 별 따기</item>
+        <item>하늘이 무너져도 솟아날 구멍이 있다.</item>
+        <item>하룻강아지 범 무서운 줄 모른다.</item>
+        <item>한 귀로 듣고 한 귀로 흘린다.</item>
+        <item>한 술 밥에 배 부르랴.</item>
+        <item>함흥차사라.</item>
+        <item>호랑이도 제 말 하면 온다.</item>
+    </string-array>
+    <string-array name="VEGETABLE">
+        <item>가지</item>
+        <item>감</item>
+        <item>감자</item>
+        <item>고구마</item>
+        <item>고추</item>
+        <item>귤</item>
+        <item>당근</item>
+        <item>대추</item>
+        <item>더덕</item>
+        <item>도라지</item>
+        <item>딸기</item>
+        <item>레몬</item>
+        <item>마늘</item>
+        <item>망고</item>
+        <item>매실</item>
+        <item>멜론</item>
+        <item>무</item>
+        <item>미나리</item>
+        <item>밀</item>
+        <item>바나나</item>
+        <item>배</item>
+        <item>배추</item>
+        <item>보리</item>
+        <item>복분자</item>
+        <item>복숭아</item>
+        <item>봄동</item>
+        <item>브로콜리</item>
+        <item>블랙베리</item>
+        <item>블루베리</item>
+        <item>사과</item>
+        <item>산딸기</item>
+        <item>상추</item>
+        <item>석류</item>
+        <item>셀러리</item>
+        <item>수박</item>
+        <item>시금치</item>
+        <item>쌀</item>
+        <item>쑥갓</item>
+        <item>아스파라거스</item>
+        <item>애호박</item>
+        <item>양배추</item>
+        <item>양상추</item>
+        <item>양송이버섯</item>
+        <item>양파</item>
+        <item>연근</item>
+        <item>열무</item>
+        <item>오렌지</item>
+        <item>오미자</item>
+        <item>오이</item>
+        <item>옥수수</item>
+        <item>용과</item>
+        <item>우엉</item>
+        <item>유자</item>
+        <item>자두</item>
+        <item>자몽</item>
+        <item>잣</item>
+        <item>죽순</item>
+        <item>참외</item>
+        <item>청경채</item>
+        <item>청포도</item>
+        <item>체리</item>
+        <item>코코넛</item>
+        <item>콩</item>
+        <item>콩나물</item>
+        <item>키위</item>
+        <item>토마토</item>
+        <item>파인애플</item>
+        <item>파파야</item>
+        <item>파프리카</item>
+        <item>팥</item>
+        <item>포도</item>
+        <item>피망</item>
+        <item>호박</item>
+        <item>황도</item>
+    </string-array>
+    <string-array name="ANIMAL">
+        <item>가오리</item>
+        <item>가재</item>
+        <item>가젤</item>
+        <item>갈치</item>
+        <item>개</item>
+        <item>개구리</item>
+        <item>개미핥기</item>
+        <item>거북이</item>
+        <item>거위</item>
+        <item>고등어</item>
+        <item>고라니</item>
+        <item>고릴라</item>
+        <item>고슴도치</item>
+        <item>고양이</item>
+        <item>곰</item>
+        <item>기린</item>
+        <item>까치</item>
+        <item>낙타</item>
+        <item>너구리</item>
+        <item>다람쥐</item>
+        <item>닭</item>
+        <item>도마뱀</item>
+        <item>독수리</item>
+        <item>돌고래</item>
+        <item>돌문어</item>
+        <item>돼지</item>
+        <item>두더지</item>
+        <item>말</item>
+        <item>망둥어</item>
+        <item>매미</item>
+        <item>맥</item>
+        <item>멧돼지</item>
+        <item>문어</item>
+        <item>물범</item>
+        <item>물소</item>
+        <item>미어캣</item>
+        <item>밍크</item>
+        <item>바다표범</item>
+        <item>박쥐</item>
+        <item>뱀</item>
+        <item>뱀장어</item>
+        <item>병어</item>
+        <item>불가사리</item>
+        <item>비둘기</item>
+        <item>사막여우</item>
+        <item>사슴</item>
+        <item>사자</item>
+        <item>상어</item>
+        <item>새우</item>
+        <item>소</item>
+        <item>수달</item>
+        <item>아르마딜로</item>
+        <item>악어</item>
+        <item>앵무새</item>
+        <item>양</item>
+        <item>얼룩말</item>
+        <item>연어</item>
+        <item>오리</item>
+        <item>오리너구리</item>
+        <item>원숭이</item>
+        <item>참새</item>
+        <item>참치</item>
+        <item>치타</item>
+        <item>침팬지</item>
+        <item>카멜레온</item>
+        <item>캥거루</item>
+        <item>코끼리</item>
+        <item>코뿔소</item>
+        <item>코알라</item>
+        <item>토끼</item>
+        <item>팬더</item>
+        <item>펠리컨</item>
+        <item>펭귄</item>
+        <item>표범</item>
+        <item>하이에나</item>
+        <item>해마</item>
+        <item>해파리</item>
+        <item>호랑이</item>
+        <item>황제펭귄</item>
+    </string-array>
+</resources>
