@@ -18,7 +18,7 @@ class TextGameActivity : AppCompatActivity() {
         R.array.VEGETABLE,
         R.array.ANIMAL,
     )
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTextGameBinding.inflate(this.layoutInflater)
@@ -30,7 +30,14 @@ class TextGameActivity : AppCompatActivity() {
             val categoryIdx = intent.getIntExtra(Key.SELECT_CATEGORY,0)
             resources.getStringArray(categoryArr[categoryIdx]).toList().shuffled()
         } else {
-            resources.getStringArray(R.array.MOVIE_KOREA).toList().shuffled()
+            val list = mutableListOf<String>()
+            val status  = intent.getIntExtra(Key.SELECT_CATEGORY,0)
+            for (i in 0 until 6){
+                if (status and (1 shl i) == 1 shl i){
+                    list += resources.getStringArray(categoryArr[i])
+                }
+            }
+            list.shuffled()
         }
 
 

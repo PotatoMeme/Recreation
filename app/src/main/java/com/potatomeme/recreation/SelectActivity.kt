@@ -4,11 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.potatomeme.recreation.databinding.ActivitySelectBinding
 
 class SelectActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelectBinding
+    private var status = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySelectBinding.inflate(layoutInflater)
@@ -19,20 +22,12 @@ class SelectActivity : AppCompatActivity() {
         if (selectCategory == Key.GAME_KEY1) {
             binding.rvList.apply {
                 layoutManager = LinearLayoutManager(context)
-                val category = arrayOf(
-                    Key.CATEGORY_KEY1,
-                    Key.CATEGORY_KEY2,
-                    Key.CATEGORY_KEY3,
-                    Key.CATEGORY_KEY4,
-                    Key.CATEGORY_KEY5,
-                    Key.CATEGORY_KEY6,
-                )
                 adapter = BasicCategoryAdapter(
                     itemClickFunction = { idx ->
                         Log.d(TAG, "onCreate: itemClickFunction")
                         val intent = Intent(this@SelectActivity, TextGameActivity::class.java)
                         intent.putExtra(Key.SELECT_SINGLE,true)
-                        intent.putExtra(Key.SELECT_CATEGORY, category[idx])
+                        intent.putExtra(Key.SELECT_CATEGORY, idx)
                         startActivity(intent)
                     },
                     lastItemClickFunction = {
@@ -50,7 +45,37 @@ class SelectActivity : AppCompatActivity() {
                 }
             }
         } else if (selectCategory == Key.GAME_KEY2) {
+            binding.btnSelect.visibility = View.VISIBLE
+            binding.rvList.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = MultiCategoryAdapter(
+                    itemClickFunction = { pos,checked ->
+                        status = if (checked){
+                            status + (1 shl pos)
+                        }else{
+                            status - (1 shl pos)
+                        }
 
+                        Log.d(TAG, "onCreate: status : $status")
+                    }
+                ).apply {
+                    submitList(
+                        listOf(
+                            "해외영화", "한국영화", "만화영화", "속담", "야채", "동물"
+                        )
+                    )
+                }
+            }
+            binding.btnSelect.setOnClickListener{
+                if (status == 0){
+                    Toast.makeText(this,"항목을 선택해주세요",Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                val intent = Intent(this@SelectActivity, TextGameActivity::class.java)
+                intent.putExtra(Key.SELECT_SINGLE,false)
+                intent.putExtra(Key.SELECT_CATEGORY, status)
+                startActivity(intent)
+            }
         }
 
     }
