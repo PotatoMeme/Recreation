@@ -50,13 +50,13 @@ class SelectActivity : AppCompatActivity() {
                 layoutManager = LinearLayoutManager(context)
                 adapter = MultiCategoryAdapter(
                     itemClickFunction = { pos,checked ->
+                        Log.d(TAG, "onCreate: beforeStatus : $status")
                         status = if (checked){
                             status + (1 shl pos)
                         }else{
                             status - (1 shl pos)
                         }
-
-                        Log.d(TAG, "onCreate: status : $status")
+                        Log.d(TAG, "onCreate: afterStatus : $status")
                     }
                 ).apply {
                     submitList(

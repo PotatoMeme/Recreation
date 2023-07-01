@@ -17,6 +17,7 @@ class MultiCategoryAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(string: String,position: Int, clickFunction: (Int,Boolean) -> Unit) {
             binding.tvBasicText.text = string
+            binding.checkBox.isClickable = false
             binding.root.setOnClickListener {
                 Log.d(TAG, "bind: clicked $position")
                 binding.checkBox.isChecked = !binding.checkBox.isChecked
