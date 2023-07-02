@@ -1,10 +1,14 @@
 package com.potatomeme.recreation
 
+import android.content.Context
+import android.graphics.Point
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.WindowManager
 import android.widget.Toast
-import com.potatomeme.recreation.databinding.ActivityMainBinding
 import com.potatomeme.recreation.databinding.ActivityTextGameBinding
+import kotlin.concurrent.thread
 
 class TextGameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTextGameBinding
@@ -19,21 +23,69 @@ class TextGameActivity : AppCompatActivity() {
         R.array.ANIMAL,
     )
 
+    private var remainPass: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTextGameBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
 
-        val single = intent.getBooleanExtra(Key.SELECT_SINGLE,true)
+        val windowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val display = windowManager.defaultDisplay
+        val size = Point()
+        display.getSize(size)
 
-        val strArray = if (single){
-            val categoryIdx = intent.getIntExtra(Key.SELECT_CATEGORY,0)
+        val dialog = TextGameSettingDialog(size) { timeChecked, time, passChecked, pass ->
+            Log.d(TAG, "onCreate: timeChecked : $timeChecked")
+            Log.d(TAG, "onCreate: time : $time")
+            Log.d(TAG, "onCreate: passChecked : $passChecked")
+            Log.d(TAG, "onCreate: pass : $pass")
+            remainPass = if (passChecked) pass else 10
+            binding.tvRemainPassCount.text = "$remainPass"
+            if (timeChecked) {
+                var inThreadTimeCount = time
+                binding.tvTime.text = "${inThreadTimeCount / 60} : ${inThreadTimeCount % 60}"
+
+                val thread = thread {
+                    while (true) {
+                        Thread.sleep(1000)
+                        Log.d(TAG, "onCreate: ${inThreadTimeCount--}")
+                        synchronized(this) {
+                            if (inThreadTimeCount == 0) {
+                                runOnUiThread {
+                                    Toast.makeText(this, "시간이 종료되었습니다.", Toast.LENGTH_SHORT).show()
+                                }
+                                return@thread
+                            }
+                        }
+                        runOnUiThread {
+                            binding.tvTime.text = "${inThreadTimeCount / 60} : ${
+                                (inThreadTimeCount % 60).let {
+                                    if (it < 10) "0$it" else it
+                                }
+                            }"
+                        }
+                    }
+                }
+                if (!thread.isAlive) {
+                    thread.start()
+                }
+            }
+
+        }.apply {
+            isCancelable = false
+        }
+        dialog.show(this.supportFragmentManager, "TextGameSettingDialog")
+
+        val single = intent.getBooleanExtra(Key.SELECT_SINGLE, true)
+
+        val strArray = if (single) {
+            val categoryIdx = intent.getIntExtra(Key.SELECT_CATEGORY, 0)
             resources.getStringArray(categoryArr[categoryIdx]).toList().shuffled()
         } else {
             val list = mutableListOf<String>()
-            val status  = intent.getIntExtra(Key.SELECT_CATEGORY,0)
-            for (i in 0 until 6){
-                if (status and (1 shl i) == 1 shl i){
+            val status = intent.getIntExtra(Key.SELECT_CATEGORY, 0)
+            for (i in 0 until 6) {
+                if (status and (1 shl i) == 1 shl i) {
                     list += resources.getStringArray(categoryArr[i])
                 }
             }
@@ -43,21 +95,39 @@ class TextGameActivity : AppCompatActivity() {
 
         idx = 0
         binding.tvText.text = strArray[idx]
+        binding.tvCount.text = "${idx + 1}/${strArray.size}"
 
-        binding.btnSkip.setOnClickListener {
-            if (idx == strArray.size){
-                Toast.makeText(this,"끝까지 푸셨습니다.",Toast.LENGTH_SHORT).show()
+
+        binding.btnPass.setOnClickListener {
+            if (idx == strArray.lastIndex) {
+                Toast.makeText(this, "끝까지 푸셨습니다.", Toast.LENGTH_SHORT).show()
                 finish()
             }
+            if (remainPass == 0) {
+                Toast.makeText(this, "주어진 패스를 전부 사용하셨습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            remainPass--
+            binding.tvRemainPassCount.text = "$remainPass"
             idx++
             binding.tvText.text = strArray[idx]
+            binding.tvCount.text = "${idx + 1}/${strArray.size}"
         }
 
         binding.btnCount.setOnClickListener {
+            if (idx == strArray.lastIndex) {
+                Toast.makeText(this, "끝까지 푸셨습니다.", Toast.LENGTH_SHORT).show()
+                finish()
+            }
             idx++
             count++
-            binding.tvCount.text = count.toString()
+            binding.tvCount.text = "${idx + 1}/${strArray.size}"
+            binding.tvCorrectCount.text = "$count"
             binding.tvText.text = strArray[idx]
         }
+    }
+
+    companion object {
+        private const val TAG = "TextGameActivity"
     }
 }
