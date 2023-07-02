@@ -68,10 +68,6 @@ class TextGameSettingDialog(
         binding.btnCorrect.setOnClickListener {
             val timeChecked = binding.cbTime.isChecked
             val time = binding.npMinute.value * 60 + binding.npSec.value
-            if (time == 0){
-                Toast.makeText(context, "0초 입니다. 시간 값을 확인해주세요", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
             val passChecked = binding.cbPass.isChecked
             val pass = binding.etPass.text.toString().toIntOrNull().let {
                 if (passChecked) {
@@ -81,6 +77,10 @@ class TextGameSettingDialog(
                     }
                     it
                 } else 0
+            }
+            if (timeChecked && time == 0){
+                Toast.makeText(context, "0초 입니다. 시간 값을 확인해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
             correctFunction(timeChecked, time, passChecked, pass)
             dismiss()
