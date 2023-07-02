@@ -13,7 +13,7 @@ import kotlin.concurrent.thread
 class TextGameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTextGameBinding
     private var idx: Int = 0
-    private var count: Int = 0
+
     private val categoryArr = arrayOf(
         R.array.MOVIE_WESTERN,
         R.array.MOVIE_KOREA,
@@ -23,6 +23,8 @@ class TextGameActivity : AppCompatActivity() {
         R.array.ANIMAL,
     )
 
+    private var correctCount: Int = 0
+    private var basePass : Int = 0
     private var remainPass: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +36,13 @@ class TextGameActivity : AppCompatActivity() {
         val size = Point()
         display.getSize(size)
 
-        val dialog = TextGameSettingDialog(size) { timeChecked, time, passChecked, pass ->
+        val settingDialog = TextGameSettingDialog(size) { timeChecked, time, passChecked, pass ->
             Log.d(TAG, "onCreate: timeChecked : $timeChecked")
             Log.d(TAG, "onCreate: time : $time")
             Log.d(TAG, "onCreate: passChecked : $passChecked")
             Log.d(TAG, "onCreate: pass : $pass")
-            remainPass = if (passChecked) pass else 10
+            basePass = if (passChecked) pass else 10
+            remainPass = basePass
             binding.tvRemainPassCount.text = "$remainPass"
             if (timeChecked) {
                 var inThreadTimeCount = time
@@ -49,20 +52,26 @@ class TextGameActivity : AppCompatActivity() {
                     while (true) {
                         Thread.sleep(1000)
                         Log.d(TAG, "onCreate: ${inThreadTimeCount--}")
-                        synchronized(this) {
-                            if (inThreadTimeCount == 0) {
-                                runOnUiThread {
-                                    Toast.makeText(this, "시간이 종료되었습니다.", Toast.LENGTH_SHORT).show()
-                                }
-                                return@thread
-                            }
-                        }
                         runOnUiThread {
                             binding.tvTime.text = "${inThreadTimeCount / 60} : ${
                                 (inThreadTimeCount % 60).let {
                                     if (it < 10) "0$it" else it
                                 }
                             }"
+                        }
+                        synchronized(this) {
+                            if (inThreadTimeCount == 0) {
+                                runOnUiThread {
+                                    Toast.makeText(this, "시간이 종료되었습니다.", Toast.LENGTH_SHORT).show()
+                                    val resultDialog = GameResultDialog(size,correctCount,basePass - remainPass){
+                                        finish()
+                                    }.apply {
+                                        isCancelable = false
+                                    }
+                                    resultDialog.show(this.supportFragmentManager, "GameResultDialog")
+                                }
+                                return@thread
+                            }
                         }
                     }
                 }
@@ -74,7 +83,7 @@ class TextGameActivity : AppCompatActivity() {
         }.apply {
             isCancelable = false
         }
-        dialog.show(this.supportFragmentManager, "TextGameSettingDialog")
+        settingDialog.show(this.supportFragmentManager, "TextGameSettingDialog")
 
         val single = intent.getBooleanExtra(Key.SELECT_SINGLE, true)
 
@@ -91,7 +100,7 @@ class TextGameActivity : AppCompatActivity() {
             }
             list.shuffled()
         }
-
+        val resultArray = IntArray(strArray.size)
 
         idx = 0
         binding.tvText.text = strArray[idx]
@@ -101,12 +110,18 @@ class TextGameActivity : AppCompatActivity() {
         binding.btnPass.setOnClickListener {
             if (idx == strArray.lastIndex) {
                 Toast.makeText(this, "끝까지 푸셨습니다.", Toast.LENGTH_SHORT).show()
-                finish()
+                val resultDialog = GameResultDialog(size,correctCount,basePass - remainPass){
+                    finish()
+                }.apply {
+                    isCancelable = false
+                }
+                resultDialog.show(this.supportFragmentManager, "GameResultDialog")
             }
             if (remainPass == 0) {
                 Toast.makeText(this, "주어진 패스를 전부 사용하셨습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            resultArray[idx] = 1
             remainPass--
             binding.tvRemainPassCount.text = "$remainPass"
             idx++
@@ -117,12 +132,18 @@ class TextGameActivity : AppCompatActivity() {
         binding.btnCount.setOnClickListener {
             if (idx == strArray.lastIndex) {
                 Toast.makeText(this, "끝까지 푸셨습니다.", Toast.LENGTH_SHORT).show()
-                finish()
+                val resultDialog = GameResultDialog(size,correctCount,basePass - remainPass){
+                    finish()
+                }.apply {
+                    isCancelable = false
+                }
+                resultDialog.show(this.supportFragmentManager, "GameResultDialog")
             }
+            resultArray[idx] = 2
             idx++
-            count++
+            correctCount++
             binding.tvCount.text = "${idx + 1}/${strArray.size}"
-            binding.tvCorrectCount.text = "$count"
+            binding.tvCorrectCount.text = "$correctCount"
             binding.tvText.text = strArray[idx]
         }
     }
