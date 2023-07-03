@@ -149,7 +149,7 @@ class SelectActivity : AppCompatActivity() {
                     lastItemClickFunction = {
                         Log.d(TAG, "onCreate: lastItemClickFunction")
                         val intent = Intent(this@SelectActivity, SelectActivity::class.java)
-                        intent.putExtra(Key.SELECT_GAME, Key.GAME_KEY5)
+                        intent.putExtra(Key.SELECT_GAME, Key.GAME_KEY6)
                         startActivity(intent)
                     }
                 ).apply {
@@ -160,7 +160,7 @@ class SelectActivity : AppCompatActivity() {
                     )
                 }
             }
-        } else if (selectCategory == Key.GAME_KEY5) {
+        } else if (selectCategory == Key.GAME_KEY6) {
             binding.btnSelect.visibility = View.VISIBLE
             binding.rvList.apply {
                 layoutManager = LinearLayoutManager(context)
