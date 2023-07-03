@@ -177,11 +177,8 @@ class RandomImageGameWithEditTextActivity : AppCompatActivity() {
                 }
                 resultDialog.show(this.supportFragmentManager, "GameResultDialog")
             }
-            resultArray[idx] = 2
             idx++
-            correctCount++
             binding.tvCount.text = "${idx + 1}/${strArray.size}"
-            binding.tvCorrectCount.text = "$correctCount"
             getMovieData(strArray[idx])
             isUserCorrectMovie = false
             inputSuccess =false
@@ -226,6 +223,9 @@ class RandomImageGameWithEditTextActivity : AppCompatActivity() {
                     .load(currentMovieThumbnail)
                     .into(binding.ivMovie)
                 inputSuccess = true
+                correctCount++
+                resultArray[idx] = 2
+                binding.tvCorrectCount.text = "$correctCount"
             }else{
                 Toast.makeText(this, "틀렸습니다.", Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "onCreate: $currentMovieName")
