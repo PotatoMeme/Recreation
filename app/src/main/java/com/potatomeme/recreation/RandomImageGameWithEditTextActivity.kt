@@ -5,11 +5,15 @@ import android.graphics.Point
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.potatomeme.recreation.databinding.ActivityRandomImageGameBinding
+import com.potatomeme.recreation.databinding.ActivityRandomImageGameWithEditTextBinding
 import org.jsoup.Jsoup
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,10 +21,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.concurrent.thread
-import kotlin.math.log
 
-class RandomImageGameActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityRandomImageGameBinding
+class RandomImageGameWithEditTextActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityRandomImageGameWithEditTextBinding
 
     private var idx: Int = 0
     private val categoryArr = arrayOf(
@@ -34,14 +37,16 @@ class RandomImageGameActivity : AppCompatActivity() {
     private var remainPass: Int = 0
 
     private lateinit var movieApi: MovieApi
+    private var isUserCorrectMovie = false
+    private var inputSuccess = false
 
     var movieImgs: List<String> = listOf()
     var movieImgsIdx = 0
-    var currentMovieName = ""
-    var currentMovieThumbnail = ""
+    private var currentMovieName = ""
+    private var currentMovieThumbnail = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRandomImageGameBinding.inflate(this.layoutInflater)
+        binding = ActivityRandomImageGameWithEditTextBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
 
         val retrofit = Retrofit.Builder()
@@ -132,6 +137,10 @@ class RandomImageGameActivity : AppCompatActivity() {
         getMovieData(strArray[idx])
 
         binding.btnPass.setOnClickListener {
+            if (inputSuccess){
+                Toast.makeText(this, "통과를 눌러주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             if (idx == strArray.lastIndex) {
                 Toast.makeText(this, "끝까지 푸셨습니다.", Toast.LENGTH_SHORT).show()
                 val resultDialog = GameResultDialog(size, correctCount, basePass - remainPass) {
@@ -145,16 +154,20 @@ class RandomImageGameActivity : AppCompatActivity() {
                 Toast.makeText(this, "주어진 패스를 전부 사용하셨습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            binding.tvText.visibility = View.INVISIBLE
             resultArray[idx] = 1
             remainPass--
             binding.tvRemainPassCount.text = "$remainPass"
             idx++
             getMovieData(strArray[idx])
             binding.tvCount.text = "${idx + 1}/${strArray.size}"
+            isUserCorrectMovie = false
         }
 
         binding.btnCount.setOnClickListener {
+            if (!inputSuccess){
+                Toast.makeText(this, "정답을 맞추지 못하셨습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             if (idx == strArray.lastIndex) {
                 Toast.makeText(this, "끝까지 푸셨습니다.", Toast.LENGTH_SHORT).show()
                 val resultDialog = GameResultDialog(size, correctCount, basePass - remainPass) {
@@ -167,24 +180,65 @@ class RandomImageGameActivity : AppCompatActivity() {
             resultArray[idx] = 2
             idx++
             correctCount++
-            binding.tvText.visibility = View.INVISIBLE
             binding.tvCount.text = "${idx + 1}/${strArray.size}"
             binding.tvCorrectCount.text = "$correctCount"
             getMovieData(strArray[idx])
+            isUserCorrectMovie = false
+            inputSuccess =false
         }
 
         binding.btnNext.setOnClickListener {
             movieImgsIdx++
             if (movieImgs.size == movieImgsIdx) movieImgsIdx = 0
-            Glide.with(this@RandomImageGameActivity)
+            Glide.with(this@RandomImageGameWithEditTextActivity)
                 .load(movieImgs[movieImgsIdx])
                 .into(binding.ivMovie)
         }
 
+        binding.etText.setOnEditorActionListener{ textView, action, event ->
+            var handled = false
+
+            if (action == EditorInfo.IME_ACTION_DONE) {
+                // 키보드 내리기
+                val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(binding.etText.windowToken, 0)
+                handled = true
+            }
+
+            handled
+        }
+
+        binding.btnInput.setOnClickListener{
+            if (isUserCorrectMovie){
+                Toast.makeText(this, "정답을 이미 보셨습니다", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val text = binding.etText.text.toString().replace(" ","")
+            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+            if(text.isEmpty()){
+                Toast.makeText(this, "값을 입력하세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (currentMovieName.replace(" ","").contains(text)){
+                Toast.makeText(this, "맞았습니다.", Toast.LENGTH_SHORT).show()
+                Glide.with(this@RandomImageGameWithEditTextActivity)
+                    .load(currentMovieThumbnail)
+                    .into(binding.ivMovie)
+                inputSuccess = true
+            }else{
+                Toast.makeText(this, "틀렸습니다.", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "onCreate: $currentMovieName")
+            }
+            binding.etText.text.clear()
+
+        }
+
         binding.btnCorrect.setOnClickListener {
-            binding.tvText.visibility = View.VISIBLE
-            binding.tvText.text = currentMovieName
-            Glide.with(this@RandomImageGameActivity)
+            if (!inputSuccess){
+                isUserCorrectMovie = true
+            }
+            Glide.with(this@RandomImageGameWithEditTextActivity)
                 .load(currentMovieThumbnail)
                 .into(binding.ivMovie)
         }
@@ -193,6 +247,15 @@ class RandomImageGameActivity : AppCompatActivity() {
             getMovieData(strArray[idx])
         }
     }
+
+
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        return true
+    }
+
 
     private fun getMovieData(key: String) {
         Thread {
@@ -226,7 +289,7 @@ class RandomImageGameActivity : AppCompatActivity() {
                             movieImgsIdx = 0
                             runOnUiThread {
                                 Log.d(TAG, "onResponse: test")
-                                Glide.with(this@RandomImageGameActivity)
+                                Glide.with(this@RandomImageGameWithEditTextActivity)
                                     .load(movieImgs[movieImgsIdx])
                                     .into(binding.ivMovie)
                             }

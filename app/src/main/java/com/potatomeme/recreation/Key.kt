@@ -11,6 +11,8 @@ object Key {
     const val GAME_KEY2 = 1
     const val GAME_KEY3 = 2
     const val GAME_KEY4 = 3
+    const val GAME_KEY5 = 4
+    const val GAME_KEY6 = 5
 
     //CATEGORY_KEY
     const val CATEGORY_KEY1 = 0
