@@ -241,6 +241,7 @@ class RandomImageGameWithEditTextActivity : AppCompatActivity() {
             Glide.with(this@RandomImageGameWithEditTextActivity)
                 .load(currentMovieThumbnail)
                 .into(binding.ivMovie)
+            Toast.makeText(this, currentMovieName, Toast.LENGTH_SHORT).show()
         }
 
         binding.fbReload.setOnClickListener {
