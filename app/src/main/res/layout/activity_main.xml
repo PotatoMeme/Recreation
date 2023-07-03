@@ -24,10 +24,19 @@
         android:layout_margin="20dp"
         android:text="이미지 맞추기 with EditText"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btn_play_image_game_with_edit_text_difficult"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <Button
+        android:id="@+id/btn_play_image_game_with_edit_text_difficult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="이미지 맞추기 with EditText 정확히맞추기"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btn_play_text_game"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/btn_play_image_game"
         android:layout_width="0dp"

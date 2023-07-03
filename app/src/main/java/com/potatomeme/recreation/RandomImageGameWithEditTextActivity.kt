@@ -2,7 +2,6 @@ package com.potatomeme.recreation
 
 import android.content.Context
 import android.graphics.Point
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -11,8 +10,8 @@ import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.potatomeme.recreation.databinding.ActivityRandomImageGameBinding
 import com.potatomeme.recreation.databinding.ActivityRandomImageGameWithEditTextBinding
 import org.jsoup.Jsoup
 import retrofit2.Call
@@ -44,6 +43,8 @@ class RandomImageGameWithEditTextActivity : AppCompatActivity() {
     var movieImgsIdx = 0
     private var currentMovieName = ""
     private var currentMovieThumbnail = ""
+
+    private var difficult = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRandomImageGameWithEditTextBinding.inflate(this.layoutInflater)
@@ -54,6 +55,23 @@ class RandomImageGameWithEditTextActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         movieApi = retrofit.create(MovieApi::class.java)
+
+        val single = intent.getBooleanExtra(Key.SELECT_SINGLE, true)
+        val strArray = if (single) {
+            val categoryIdx = intent.getIntExtra(Key.SELECT_CATEGORY, 0)
+            resources.getStringArray(categoryArr[categoryIdx]).toList().shuffled()
+        } else {
+            val list = mutableListOf<String>()
+            val status = intent.getIntExtra(Key.SELECT_CATEGORY, 0)
+            for (i in categoryArr.indices) {
+                if (status and (1 shl i) == 1 shl i) {
+                    list += resources.getStringArray(categoryArr[i])
+                }
+            }
+            list.shuffled()
+        }
+        val resultArray = IntArray(strArray.size)
+        difficult = intent.getBooleanExtra(Key.SELECT_DIFFICULT,false)
 
         val windowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = windowManager.defaultDisplay
@@ -67,6 +85,7 @@ class RandomImageGameWithEditTextActivity : AppCompatActivity() {
             Log.d(TAG, "onCreate: pass : $pass")
             basePass = if (passChecked) pass else 10
             remainPass = basePass
+            getMovieData(strArray[idx])
             binding.tvRemainPassCount.text = "$remainPass"
             if (timeChecked) {
                 var inThreadTimeCount = time
@@ -115,26 +134,10 @@ class RandomImageGameWithEditTextActivity : AppCompatActivity() {
         }
         settingDialog.show(this.supportFragmentManager, "TextGameSettingDialog")
 
-        val single = intent.getBooleanExtra(Key.SELECT_SINGLE, true)
-        val strArray = if (single) {
-            val categoryIdx = intent.getIntExtra(Key.SELECT_CATEGORY, 0)
-            resources.getStringArray(categoryArr[categoryIdx]).toList().shuffled()
-        } else {
-            val list = mutableListOf<String>()
-            val status = intent.getIntExtra(Key.SELECT_CATEGORY, 0)
-            for (i in categoryArr.indices) {
-                if (status and (1 shl i) == 1 shl i) {
-                    list += resources.getStringArray(categoryArr[i])
-                }
-            }
-            list.shuffled()
-        }
-        val resultArray = IntArray(strArray.size)
-
         idx = 0
         binding.tvCount.text = "${idx + 1}/${strArray.size}"
 
-        getMovieData(strArray[idx])
+
 
         binding.btnPass.setOnClickListener {
             if (inputSuccess){
@@ -159,6 +162,7 @@ class RandomImageGameWithEditTextActivity : AppCompatActivity() {
             binding.tvRemainPassCount.text = "$remainPass"
             idx++
             getMovieData(strArray[idx])
+            binding.tvHint.visibility = View.GONE
             binding.tvCount.text = "${idx + 1}/${strArray.size}"
             isUserCorrectMovie = false
         }
@@ -179,6 +183,7 @@ class RandomImageGameWithEditTextActivity : AppCompatActivity() {
             }
             idx++
             binding.tvCount.text = "${idx + 1}/${strArray.size}"
+            binding.tvHint.visibility = View.GONE
             getMovieData(strArray[idx])
             isUserCorrectMovie = false
             inputSuccess =false
@@ -217,11 +222,13 @@ class RandomImageGameWithEditTextActivity : AppCompatActivity() {
                 Toast.makeText(this, "값을 입력하세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (currentMovieName.replace(" ","").contains(text)){
+            if ((difficult && currentMovieName.replace(" ","") == text) || (!difficult && currentMovieName.replace(" ","").contains(text))){
                 Toast.makeText(this, "맞았습니다.", Toast.LENGTH_SHORT).show()
                 Glide.with(this@RandomImageGameWithEditTextActivity)
                     .load(currentMovieThumbnail)
                     .into(binding.ivMovie)
+                binding.tvHint.visibility = View.VISIBLE
+                binding.tvHint.text = currentMovieName
                 inputSuccess = true
                 correctCount++
                 resultArray[idx] = 2
@@ -294,6 +301,17 @@ class RandomImageGameWithEditTextActivity : AppCompatActivity() {
                                     .load(movieImgs[movieImgsIdx])
                                     .into(binding.ivMovie)
                             }
+                            Thread{
+                                Thread.sleep(15000)
+                                Log.d(TAG, "onResponse: time is go")
+                                Log.d(TAG, "onResponse: ${currentMovieName == movieName}")
+                                if (currentMovieName == movieName) {
+                                    runOnUiThread{
+                                        binding.tvHint.visibility = View.VISIBLE
+                                        binding.tvHint.text = extractInitials(currentMovieName)
+                                    }
+                                }
+                            }.start()
                         } else {
                             Toast.makeText(applicationContext, "API 호출 실패", Toast.LENGTH_SHORT)
                                 .show()
@@ -310,6 +328,33 @@ class RandomImageGameWithEditTextActivity : AppCompatActivity() {
         }.start()
     }
 
+
+    private fun extractInitials(text: String): String {
+        val chs = arrayOf(
+            "ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ",
+            "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ",
+            "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ",
+            "ㅋ", "ㅌ", "ㅍ", "ㅎ"
+        )
+
+        val result = StringBuilder()
+
+        for (char in text) {
+            val unicodeValue = char.toInt()
+            val charString = char.toString()
+
+            // Check if the character is a Hangul syllable
+            if (unicodeValue in 0xAC00..0xD7A3) {
+                val uniVal = unicodeValue - 0xAC00
+                val initialIndex = ((uniVal - (uniVal % 28))/28)/21
+                result.append(chs[initialIndex] )
+            } else {
+                result.append(char)
+            }
+        }
+
+        return result.toString()
+    }
 
     companion object {
         private const val TAG = "RandomImageGameActivity"
