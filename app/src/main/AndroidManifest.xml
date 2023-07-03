@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Recreation"
         tools:targetApi="31">
         <activity
+            android:name=".RandomImageGameActivity"
+            android:exported="false" />
+        <activity
             android:name=".SelectActivity"
             android:exported="false" />
         <activity
