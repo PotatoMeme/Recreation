@@ -284,7 +284,7 @@ class RandomImageGameWithEditTextActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             val moviePhotoResponse = response.body()
                             moviePhotoResponse?.let { photoResponse ->
-                                movieImgs = photoResponse.contents.map { it.imageUrl }
+                                movieImgs = photoResponse.contents.map { it.imageUrl }.filter { it.isNotBlank() }.shuffled()
                             }
                             movieImgsIdx = 0
                             runOnUiThread {
