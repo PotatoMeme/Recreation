@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="MOVIE_WESTERN_KEY">
+
+        <item>94464</item>
+        <item>40878</item>
+        <item>39519</item>
+        <item>43729</item>
+        <item>44188</item>
+        <item>48651</item>
+        <item>43365</item>
+        <item>44704</item>
+        <item>4167</item>
+        <item>40896</item>
+        <item>13239</item>
+        <item>41235</item>
+        <item>52598</item>
+        <item>51071</item>
+        <item>55287</item>
+        <item>1511</item>
+        <item>147</item>
+        <item>1911</item>
+        <item>3703</item>
         <item>42533</item>
         <item>10016</item>
         <item>10021</item>
@@ -106,7 +126,9 @@
         <item>36630</item>
         <item>42877</item>
         <item>127118</item>
+        <item>93697</item>
         <item>62004</item>
+        <item>43732</item>
     </string-array>
     <string-array name="MOVIE_KOREA_KEY">
         <item>94647</item>
@@ -210,7 +232,32 @@
         <item>67165</item>
     </string-array>
     <string-array name="MOVIE_COMIC_KEY">
-        <item>163777</item>
+
+        <item>43307</item>
+        <item>3126</item>
+
+
+        <item>136532</item>
+        <item>120609</item>
+        <item>85494</item>
+        <item>78683</item>
+        <item>56879</item>
+        <item>43693</item>
+        <item>46912</item>
+        <item>41129</item>
+        <item>46904</item>
+        <item>46913</item>
+        <item>44185</item>
+        <item>46449</item>
+        <item>42893</item>
+        <item>46290</item>
+        <item>46240</item>
+        <item>46118</item>
+        <item>46085</item>
+        <item>44212</item>
+        <item>46046</item>
+        <item>92815</item>
+
         <item>84801</item>
         <item>103735</item>
         <item>104209</item>
