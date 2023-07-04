@@ -2,6 +2,14 @@
 <resources>
     <string-array name="MOVIE_WESTERN_KEY">
 
+        <item>70829</item>
+        <item>4229</item>
+        <item>52530</item>
+        <item>84804</item>
+        <item>2635</item>
+        <item>145935</item>
+        <item>114159</item>
+        <item>91681</item>
         <item>94464</item>
         <item>40878</item>
         <item>39519</item>
@@ -131,6 +139,9 @@
         <item>43732</item>
     </string-array>
     <string-array name="MOVIE_KOREA_KEY">
+
+        <item>53962</item>
+        <item>105736</item>
         <item>94647</item>
         <item>105759</item>
         <item>144854</item>
