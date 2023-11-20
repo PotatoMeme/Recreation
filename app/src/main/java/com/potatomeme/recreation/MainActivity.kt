@@ -3,6 +3,12 @@ package com.potatomeme.recreation
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.potatomeme.recreation.Key.GAME_KEY1
+import com.potatomeme.recreation.Key.GAME_KEY3
+import com.potatomeme.recreation.Key.GAME_KEY5
+import com.potatomeme.recreation.Key.GAME_KEY6
+import com.potatomeme.recreation.Key.GAME_KEY7
+import com.potatomeme.recreation.Key.SELECT_GAME
 import com.potatomeme.recreation.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -14,9 +20,25 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
 
-        binding.btnPlay.setOnClickListener {
-            val intent = Intent(this,SelectActivity::class.java)
-            intent.putExtra(Key.SELECT_GAME,0)
+        binding.btnPlayTextGame.setOnClickListener {
+            val intent = Intent(this, SelectActivity::class.java)
+            intent.putExtra(SELECT_GAME, GAME_KEY1)
+            startActivity(intent)
+        }
+
+        binding.btnPlayImageGame.setOnClickListener {
+            val intent = Intent(this, SelectActivity::class.java)
+            intent.putExtra(SELECT_GAME, GAME_KEY3)
+            startActivity(intent)
+        }
+        binding.btnPlayImageGameWithEditText.setOnClickListener {
+            val intent = Intent(this, SelectActivity::class.java)
+            intent.putExtra(SELECT_GAME, GAME_KEY5)
+            startActivity(intent)
+        }
+        binding.btnPlayImageGameWithEditTextDifficult.setOnClickListener {
+            val intent = Intent(this, SelectActivity::class.java)
+            intent.putExtra(SELECT_GAME, GAME_KEY7)
             startActivity(intent)
         }
     }
